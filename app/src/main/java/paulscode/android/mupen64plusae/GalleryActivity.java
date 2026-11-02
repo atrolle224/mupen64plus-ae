@@ -649,7 +649,7 @@ public class GalleryActivity extends AppCompatActivity implements GameSidebarAct
             }
         }
 
-        mShowAds = !mAppData.isPro && !mAppData.isAmazon && !mAppData.isAndroidTv;
+        mShowAds = false;
 
         if (mShowAds) {
             // Create the observer which updates the UI.

@@ -248,7 +248,6 @@ dependencies {
 
     // Playwire
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.21"
-    implementation 'com.intergi.playwire:playwiresdk_total:9.3.0'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
     implementation project(':ae-bridge')

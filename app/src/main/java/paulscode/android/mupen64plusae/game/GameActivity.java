@@ -565,7 +565,7 @@ public class GameActivity extends AppCompatActivity implements PromptConfirmList
         float ratio = (float)Math.max(metrics.heightPixels, metrics.widthPixels) /
                 (float)Math.min(metrics.heightPixels, metrics.widthPixels);
 
-        mShowAds = !mAppData.isPro && !mAppData.isAmazon && !mAppData.isAndroidTv && ratio > 1.5;
+        mShowAds = false;
         if (mShowAds) {
 
             // Create the observer which updates the UI.

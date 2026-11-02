@@ -26,14 +26,6 @@ allprojects {
         google()
 
         maven {
-            name = "GitHubPackages"
-            url = 'https://maven.pkg.github.com/intergi/playwire-android-binaries'
-            credentials {
-                username = properties.getProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = properties.getProperty("gpr.key") ?: System.getenv("TOKED")
-            }
-        }
-        maven {
             // ironsource
             url 'https://android-sdk.is.com/'
         }
