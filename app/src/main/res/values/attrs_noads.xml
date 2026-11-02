@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- the ad view's layout attributes; ads are off in this build -->
+    <declare-styleable name="PWBannerView">
+        <attr name="autoload" format="boolean" />
+        <attr name="ad_unit_name" format="string" />
+    </declare-styleable>
+</resources>
