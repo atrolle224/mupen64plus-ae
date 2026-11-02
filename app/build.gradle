@@ -44,7 +44,7 @@ android {
                 debugSymbolLevel 'FULL'
             }
             firebaseCrashlytics {
-                nativeSymbolUploadEnabled false
+                nativeSymbolUploadEnabled true
                 unstrippedNativeLibsDir "build/tmp/libs"
             }
         }
@@ -57,7 +57,7 @@ android {
                 debugSymbolLevel 'FULL'
             }
             firebaseCrashlytics {
-                nativeSymbolUploadEnabled false
+                nativeSymbolUploadEnabled true
                 unstrippedNativeLibsDir "build/tmp/libs"
             }
         }
