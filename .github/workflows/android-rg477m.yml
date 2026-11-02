@@ -1,0 +1,59 @@
+name: Android 477M
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [rg477m]
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Local build inputs
+        run: |
+          echo "sdk.dir=$ANDROID_HOME" > local.properties
+          # Crashlytics needs a Firebase config to build; this one points nowhere
+          cat > app/google-services.json <<'JSON'
+          {
+            "project_info": { "project_number": "000000000000", "project_id": "rg477m-local", "storage_bucket": "rg477m-local.appspot.com" },
+            "client": [ {
+              "client_info": { "mobilesdk_app_id": "1:000000000000:android:0000000000000000", "android_client_info": { "package_name": "org.mupen64plusae.v3.fzurita.rg477m" } },
+              "oauth_client": [], "api_key": [ { "current_key": "AIzaSy000000000000000000000000000000000" } ],
+              "services": { "appinvite_service": { "other_platform_oauth_client": [] } }
+            } ],
+            "configuration_version": "1"
+          }
+          JSON
+          sed -i 's/abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"/abiFilters "arm64-v8a"/' app/build.gradle
+          find . -name build.gradle -not -path ./app/build.gradle -exec sed -i 's/abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"/abiFilters "arm64-v8a"/' {} \;
+
+      - name: Assemble
+        run: ./gradlew assembleFreeRelease --stacktrace
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m64plus-fz-477m-arm64
+          path: app/build/outputs/apk/free/release/*.apk
+
+      - name: Keep only the newest build
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list -R "$GITHUB_REPOSITORY" -w "Android 477M" -L 50 --json databaseId \
+            --jq ".[].databaseId | select(. != ${{ github.run_id }})" | while read -r id; do
+            gh run delete "$id" -R "$GITHUB_REPOSITORY" || true
+          done
