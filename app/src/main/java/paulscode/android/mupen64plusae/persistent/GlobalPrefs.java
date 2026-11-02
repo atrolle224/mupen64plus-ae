@@ -434,7 +434,7 @@ public class GlobalPrefs
     static final String DEFAULT_EMULATION_PROFILE_DEFAULT = "Glide64-Accurate";
     public static final String DEFAULT_TOUCHSCREEN_PROFILE_DEFAULT = "Analog";
     public static final String DEFAULT_TOUCHSCREEN_DPAD_PROFILE_DEFAULT = "Everything";
-    static final String DEFAULT_CONTROLLER_PROFILE_DEFAULT = "Android Gamepad";
+    static final String DEFAULT_CONTROLLER_PROFILE_DEFAULT = "RG477M (D-pad = stick)";
     public static final String DEFAULT_LOCALE_OVERRIDE = "";
     // ... add more as needed
 
