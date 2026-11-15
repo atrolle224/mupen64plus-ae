@@ -553,6 +553,11 @@ public class GlobalPrefs
         videoSurfaceZoom = mPreferences.getInt( "displayZoomSeek", 100 );
 
         shaderPasses = new ArrayList<>();
+        // RG477M build: CRT Geometry once, also on an existing install; cleared after, it stays cleared
+        if (!mPreferences.getBoolean("rg477mCrtDefault", false)) {
+            mPreferences.edit().putString(KEY_SHADER_PASS, ShaderLoader.CTR_GEOM + ",")
+                    .putBoolean("rg477mCrtDefault", true).apply();
+        }
         String shaderPassesString =  mPreferences.getString( KEY_SHADER_PASS, "" );
 
         if (!TextUtils.isEmpty(shaderPassesString)) {
