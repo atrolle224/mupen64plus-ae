@@ -81,7 +81,9 @@ public class PlayerMap extends SerializableMap
     
     public boolean testHardware( int hardwareId, int player )
     {
-        return mDisabled || (getNumberOfMappedPlayers() == 0 && player == 1) ||
+        // RG477M build: a controller mapped to no player plays as player 1, so the built-in
+        // controls and a Bluetooth pad both drive it even after one of them was mapped
+        return mDisabled || (player == 1 && mMap.get( hardwareId, 0 ) == 0) ||
                 mMap.get( hardwareId, 0 ) == player;
     }
     
